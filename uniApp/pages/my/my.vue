@@ -1,6 +1,6 @@
 <template>
 	<view>
-		this is index
+		this is my
 	</view>
 </template>
 
