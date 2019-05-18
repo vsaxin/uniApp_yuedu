@@ -30,7 +30,7 @@ class member{
 	
 	public function login(){
 		// 签名验证
-		//checkSign();
+		checkSign();
 		//调用模型完成用户登录及注册
         $memberModel = new \hsModel\member();
         $memberModel->login();

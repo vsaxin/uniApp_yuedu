@@ -9,6 +9,7 @@
 
 <script>
 	var _self,pageOptions,session_key,openid;
+	var sign = require('../../commons/sign.js');
 	export default {
 		data() {
 			return {
@@ -16,6 +17,7 @@
 			}
 		},
 		onLoad:function(options){
+			sign.sign(this.apiServer);
 			 _self = this;
 			pageOptions = options;
 			// #ifdef MP-WEIXIN
@@ -90,7 +92,9 @@
 		methods: {
 		// #ifdef MP-WEIXIN
         getUserInfo : (info) => {
+			console.log(info);
             info = info.mp.detail.userInfo;
+			var sign = uni.getStorageSync('sign');
             // 与服务器交互将数据提交到服务端数据库
             uni.request({
                 url: _self.apiServer+'member&m=login',
@@ -100,6 +104,7 @@
                     openid : openid,
                     name   : info.nickName,
                     face   : info.avatarUrl,
+					sign   : sign
                 },
                 success: res => {
                     console.log(res);
