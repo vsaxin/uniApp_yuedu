@@ -7,7 +7,8 @@
 		<view class="artList">
 			<block v-for="(item, index) in artList" :key="index">
 				<view class="item" v-if="item.type == 'image'">
-					<image :src="item.content" :data-index="index" mode="widthFix" @tap="removeImg" />
+					<!-- 当点击时给点击时间的target.dataset添加index、indexe属性（indexe是随便写的） -->
+					<image :src="item.content" :data-index="index" :data-indexe="43342" mode="widthFix" @tap="removeImg" />
 				</view>
 				<view class="item" v-if="item.type == 'text'">
 					<textarea placeholder="" v-model="artList[index].content" />
@@ -73,6 +74,7 @@
             success: res => {
                 if(res.data.status == 'ok'){
                     // 把数据格式整理为 picker 支持的格式 ['分类名', ...]
+					console.log(res);
                     var categories = res.data.data;
                     for(var k in categories){
                         _self.caties.push(categories[k]);
@@ -85,10 +87,11 @@
 		},
 		methods: {
 			cateChange : function(e){
-            var sedIndex          = e.detail.value;
-            this.currentCateIndex = sedIndex;
+				console.log(e);
+            var sedIndex          = e.detail.value;//获取点击了第几个（index)
+            this.currentCateIndex = sedIndex; //在前端显示出来
             // 获取选择的分类名称
-            if(sedIndex < 1){return ;}
+            if(sedIndex < 1){return ;} //如果选择了'请选择'就不执行下面的获取后端接口对应的id
             var cateName = this.caties[sedIndex];
             for(var k in this.catiesFromApi){
                 if(cateName == this.catiesFromApi[k]){
@@ -96,18 +99,20 @@
                     break;
                 }
             }
-            this.currentCateIndex = sedIndex;
         },
 		addImg : function(){
             uni.chooseImage({
                 count: 1,
                 sizeType: ['compressed'],
                 success: function(res) {
+					console.log(res);
+					// artlist在展示区循环遍历
                     _self.artList.push({"type":"image", "content" : res.tempFilePaths[0]})
                 }
             })
         },
 		removeImg : function(e){
+			console.log(e);
             var index = e.currentTarget.dataset.index;
             uni.showModal({
                 content:"确定要删除此图片吗",
