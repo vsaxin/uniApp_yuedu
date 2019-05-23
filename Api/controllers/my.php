@@ -34,7 +34,7 @@ class my{
 		$arts = $db
 				->where('art_uid = ?', array($user['u_id']))
 				->order('art_id desc')
-				->limit(($page - 1) * 10, 10)
+				->limit(($page - 1) * 10, 10) //分页，每页十条
 				->fetchAll();
 		if(empty($arts)){exit(jsonCode('empty', ''));}
 		exit(jsonCode('ok', $arts));

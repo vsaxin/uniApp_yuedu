@@ -61,12 +61,13 @@
 		},
 		onLoad : function() {
 		_self = this;
+		signModel.sign(_self.apiServer);
 		//backpage, backtype 2个参数分别代表：
 		// backpage : 登录后返回的页面
 		// backtype : 打开页面的类型[1 : redirectTo 2 : switchTab]
 		loginRes = this.checkLogin('../write/write', '2');
 		if(!loginRes){return false;}
-		signModel.sign(_self.apiServer);
+		// signModel.sign(_self.apiServer);
 		// 加载文章分类
         uni.request({
             url: this.apiServer+'category&m=index',
@@ -108,7 +109,7 @@
             if(this.needUploadImg.length < 1 || this.uploadIndex >=  this.needUploadImg.length){
                 uni.showLoading({title:"正在提交"});
                 // 将信息整合后提交到服务器
-                var sign = uni.getStorageSync('sign');
+                var sign = uni.getStorageSync('sign'); //onload已经签名了
                 uni.request({
                     url: this.apiServer + 'art&m=add',
                     method: 'POST',
@@ -118,16 +119,14 @@
                         content : JSON.stringify(_self.artList),
                         uid     : loginRes[0], //用户登录信息UID
                         random  : loginRes[1], //用户登录信息随机码
-                        cate    : _self.sedCateIndex,
+                        cate    : _self.sedCateIndex, //分类
                         sign    : sign
                     },
                     success: res => {
                         console.log(res);
                         if(res.data.status == 'ok'){
                             uni.showToast({title:"提交成功", icon:"none"});
-                            _self.artList = [];
-                            // 清空数据
-                            signModel.sign(_self.apiServer);
+                            _self.artList = [];                            
                             // 防止数据缓存
                             _self.currentCateIndex = 0;
                             _self.sedCateIndex     = 0;
