@@ -81,7 +81,7 @@ class art{
 		)
 		*/
 		// 验证签名
-		checkSign();
+		checkSign(); //在index.php
 		// 验证用户合法性
 		$user = checkUser();
 		// 提交主要信息
@@ -97,6 +97,7 @@ class art{
 		if(!$articleId){exit(jsonCode('error', '服务器忙请重试'));}
 		// 更新会员积分
 		$memberDb = \hsTool\db::getInstance('members');
+		//积分加10
 		$memberDb->where('u_id = ?', array($user['u_id']))->filed('u_integral', 10);
 		exit(jsonCode('ok', 'ok'));
 	}

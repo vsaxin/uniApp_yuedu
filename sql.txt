@@ -1,0 +1,11 @@
+CREATE TABLE `yuedu_articles` (
+  `art_id` int(11) NOT NULL AUTO_INCREMENT,
+  `art_cate` int(10) DEFAULT NULL,
+  `art_title` varchar(200) DEFAULT NULL,
+  `art_uid` int(11) DEFAULT NULL,
+  `art_content` text,
+  `art_createtime` int(11) DEFAULT NULL,
+  PRIMARY KEY (`art_id`),
+  KEY `art_uid` (`art_uid`),
+  KEY `art_cate` (`art_cate`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
