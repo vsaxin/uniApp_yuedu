@@ -16,8 +16,8 @@ Vue.prototype.checkLogin = function(backpage, backtype){
 	return [SUID, SRAND, SNAME, SFACE];
 }
 var APITOKEN  = 'api2018';
-Vue.prototype.apiServer = 'http://192.168.18.34:8888/index.php?token='+APITOKEN+'&c=';
-Vue.prototype.staticServer = 'http://192.168.18.34:8888/';
+Vue.prototype.apiServer = 'http://192.168.18.41:8888/index.php?token='+APITOKEN+'&c=';
+Vue.prototype.staticServer = 'http://192.168.18.41:8888/';
 const app = new Vue({
     ...App
 })

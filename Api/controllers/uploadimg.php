@@ -15,7 +15,7 @@ class uploadimg{
             //存到imgs/随机名.扩展名
             $imageSavePath = 'imgs/'.uniqid().'.'.$exename;
             if(move_uploaded_file($_FILES['file']['tmp_name'], $imageSavePath)){
-
+                //应该使用静态云存储
                 exit(jsonCode('ok', $imageSavePath));
             }else{
                 exit(jsonCode('error', 'upload error 01'));

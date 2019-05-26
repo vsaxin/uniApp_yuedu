@@ -2,7 +2,9 @@
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
             "path" : "pages/index/index",
-            "style" : {}
+            "style" : {
+				"enablePullDownRefresh":true //允许下拉刷新
+			}
         }
         ,{
             "path" : "pages/write/write",
@@ -14,6 +16,14 @@
         }
         ,{
             "path" : "pages/login/login",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/editArt/editArt",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/info/info",
             "style" : {}
         }
     ],

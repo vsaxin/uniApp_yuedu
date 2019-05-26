@@ -16,7 +16,7 @@ class art{
 	}
 	
 	public function getList(){
-		$_GET['cate'] = empty($_GET['cate']) ? 0 : intval($_GET['cate']);
+		$_GET['cate'] = empty($_GET['cate']) ? 0 : intval($_GET['cate']);//分类默认0，或者取整
         $_GET['page'] = empty($_GET['page']) ? 1 : intval($_GET['page']);
         $dbArticles = \hsTool\db::getInstance('articles');
         if(empty($_GET['cate'])){
